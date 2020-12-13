@@ -44,7 +44,7 @@ class OneCardInRow extends StatelessWidget {
                 Container(
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
-                      colors: [Colors.transparent, Colors.black45],
+                      colors: [Colors.transparent, Colors.black.withOpacity(0.65)],
                       stops: [0.5, 1],
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,

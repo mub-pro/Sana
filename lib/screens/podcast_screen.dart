@@ -10,7 +10,6 @@ import '../custom_icon_icons.dart';
 class PodcastScreen extends StatefulWidget {
   final Podcast podcast;
   PodcastScreen({this.podcast});
-  static const String id = 'podcast_screen';
   @override
   _PodcastScreenState createState() => _PodcastScreenState();
 }
@@ -23,18 +22,12 @@ class _PodcastScreenState extends State<PodcastScreen>
   Duration _position = Duration();
 
   void _playSound(String url) async {
-    int result = await audioPlayer.play(url);
+    int result = await audioPlayer.play(url, respectSilence: true);
     if (result == 1) {
       setState(() {
         _isPlaying = true;
       });
     }
-
-    audioPlayer.onDurationChanged.listen((d) {
-      setState(() {
-        _duration = d;
-      });
-    });
 
     audioPlayer.onAudioPositionChanged.listen((p) {
       setState(() {
@@ -77,15 +70,22 @@ class _PodcastScreenState extends State<PodcastScreen>
     }
   }
 
-  // @override
-  // void dispose() {
-  //   // TODO: implement dispose
-  //   audioPlayer.stop();
-  //   audioPlayer.dispose();
-  //
-  //   super.dispose();
-  //
-  // }
+  void getDuration()  {
+     audioPlayer.setUrl(widget.podcast.url);
+    audioPlayer.onDurationChanged.listen((event) {
+      setState(() {
+       _duration = event;
+      });
+    });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getDuration();
+
+  }
 
   @override
   Widget build(BuildContext context) {

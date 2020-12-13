@@ -12,7 +12,6 @@ import '../custom_icon_icons.dart';
 
 class StoryScreen extends StatelessWidget {
   final Story story;
-  static const String id = 'story_screen';
   StoryScreen({this.story});
   @override
   Widget build(BuildContext context) {

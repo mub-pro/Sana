@@ -31,7 +31,6 @@ class _NavBarState extends State<NavBar> {
   Widget build(BuildContext context) {
     return WidgetInfo(
       builder: (context, deviceInfo) {
-        print(deviceInfo.deviceType);
         return Scaffold(
           bottomNavigationBar: Container(
             height: deviceInfo.deviceType == DeviceType.Mobile
