@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "397349585029",
+    "project_id": "sana-9090",
+    "storage_bucket": "sana-9090.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:397349585029:android:9d638767b4acdc108ea9ec",
+        "android_client_info": {
+          "package_name": "com.example.original_sana"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "397349585029-d3vjali0gk34n3li5dpel50ddn29ucco.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDb7bxTUfp4nUXRvoAjCvwicbwLv3ehUzo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "397349585029-d3vjali0gk34n3li5dpel50ddn29ucco.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "397349585029-0b9cuin33bi84811frt0hhu8b4nfs953.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.sanaApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

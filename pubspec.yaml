@@ -1,0 +1,58 @@
+name: original_sana
+description: A media application for kids.
+
+# The following line prevents the package from being accidentally published to
+# pub.dev using `pub publish`. This is preferred for private packages.
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+
+  # The following adds the Cupertino Icons font to your application.
+  # Use with the CupertinoIcons class for iOS style icons.
+  cupertino_icons: ^1.0.0
+  provider: ^4.3.2+3
+  flutter_hooks: ^0.15.0
+  lottie: ^0.7.0+1
+  firebase_core: ^0.5.3
+  cloud_firestore: ^0.14.4
+  smooth_page_indicator: ^0.2.0
+  moor_flutter: ^3.1.0
+  flutter_youtube: ^2.0.0
+  share: ^0.6.5+4
+  audioplayers: ^0.17.0
+
+dev_dependencies:
+  moor_generator: ^3.4.0
+  build_runner:
+  flutter_test:
+    sdk: flutter
+
+# For information on the generic Dart part of this file, see the
+# following page: https://dart.dev/tools/pub/pubspec
+
+# The following section is specific to Flutter.
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/lottie/animated.json
+  fonts:
+    - family: Dubai R
+      fonts:
+        - asset: assets/fonts/Dubai-Regular.ttf
+    - family: Dubai M
+      fonts:
+        - asset: assets/fonts/Dubai-Medium.ttf
+    - family: Dubai B
+      fonts:
+        - asset: assets/fonts/Dubai-Bold.ttf
+    - family: CustomIcon
+      fonts:
+        - asset: assets/icons/CustomIcon.ttf
