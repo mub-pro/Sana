@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:original_sana/models/models.dart';
 import 'package:original_sana/sizes_information/device_type.dart';
 import 'package:original_sana/sizes_information/widget_info.dart';
-import 'package:original_sana/widgets/custom_back_button.dart';
 import 'package:original_sana/widgets/custom_icon_button.dart';
 
 import '../custom_icon_icons.dart';
@@ -78,12 +77,15 @@ class _PodcastScreenState extends State<PodcastScreen>
     }
   }
 
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-    audioPlayer.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   // TODO: implement dispose
+  //   audioPlayer.stop();
+  //   audioPlayer.dispose();
+  //
+  //   super.dispose();
+  //
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -99,7 +101,26 @@ class _PodcastScreenState extends State<PodcastScreen>
                 fit: BoxFit.cover,
               ),
               //Back Button
-              CustomBackButton(),
+              Positioned(
+                top: MediaQuery.of(context).size.height * 0.06,
+                left: MediaQuery.of(context).size.width * 0.04,
+                child: WidgetInfo(
+                  builder: (context, deviceInfo) {
+                    print(deviceInfo.width);
+                    return IconButton(
+                      iconSize: deviceInfo.deviceType == DeviceType.Mobile ? 50.0 : 100.0,
+                      icon: Icon(
+                        CustomIcon.left_open,
+                        color: Colors.white,
+                      ),
+                      onPressed: () async {
+                        await audioPlayer.dispose();
+                        Navigator.pop(context);
+                      },
+                    );
+                  },
+                ),
+              ),
               //Name
               Positioned(
                 top: deviceInfo.height * 0.2,
@@ -185,9 +206,11 @@ class _PodcastScreenState extends State<PodcastScreen>
                             min: 0,
                             max: _duration.inSeconds.toDouble(),
                             onChanged: (double value) {
-                              setState(() {
-                                _seekTo(value.toInt());
-                              });
+                                setState(() {
+                                  _seekTo(value.toInt());
+                                });
+
+
                             },
                           ),
                           //Duration
