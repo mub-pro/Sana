@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:original_sana/database/moor/favorites.dart';
 import 'package:original_sana/sizes_information/device_type.dart';
@@ -36,9 +37,16 @@ class OneCardInRow extends StatelessWidget {
               fit: StackFit.expand,
               children: <Widget>[
                 //Image
-                Image.network(
-                  image,
-                  fit: BoxFit.cover,
+                CachedNetworkImage(
+                  imageUrl: image,
+                  imageBuilder: (context, imageProvider) => Container(
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: imageProvider,
+                          fit: BoxFit.cover,),
+                    ),
+                  ),
+                  placeholder: (context, url) => Center(child: CircularProgressIndicator()),
                 ),
                 //Shadow
                 Container(

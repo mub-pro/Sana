@@ -1,5 +1,5 @@
 import 'dart:math';
-
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_youtube/flutter_youtube.dart';
@@ -26,6 +26,8 @@ class _SeriesScreenState extends State<SeriesScreen>
     with SingleTickerProviderStateMixin {
   int _selectedSeason = 0;
   TabController _tabController;
+
+
   @override
   void initState() {
     // TODO: implement initState
@@ -182,36 +184,39 @@ class _SeriesScreenState extends State<SeriesScreen>
                                     //the image beside
                                     Positioned(
                                       right: 0,
-                                      child: Container(
-                                        height: deviceInfo.deviceType ==
-                                                DeviceType.Mobile
-                                            ? 100.0
-                                            : 150.0,
-                                        width: deviceInfo.deviceType ==
-                                                DeviceType.Mobile
-                                            ? 120.0
-                                            : 150.0,
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius: BorderRadius.only(
-                                            topRight: Radius.circular(
-                                              deviceInfo.deviceType ==
-                                                      DeviceType.Mobile
-                                                  ? 30.0
-                                                  : 50.0,
+                                      child: CachedNetworkImage(
+                                        imageUrl: widget.series.image,
+                                        imageBuilder: (context, imageProvider) => Container(
+                                          height: deviceInfo.deviceType ==
+                                              DeviceType.Mobile
+                                              ? 100.0
+                                              : 150.0,
+                                          width: deviceInfo.deviceType ==
+                                              DeviceType.Mobile
+                                              ? 120.0
+                                              : 150.0,
+                                          decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            borderRadius: BorderRadius.only(
+                                              topRight: Radius.circular(
+                                                deviceInfo.deviceType ==
+                                                    DeviceType.Mobile
+                                                    ? 30.0
+                                                    : 50.0,
+                                              ),
+                                              bottomRight: Radius.circular(
+                                                deviceInfo.deviceType ==
+                                                    DeviceType.Mobile
+                                                    ? 30.0
+                                                    : 50.0,
+                                              ),
                                             ),
-                                            bottomRight: Radius.circular(
-                                              deviceInfo.deviceType ==
-                                                      DeviceType.Mobile
-                                                  ? 30.0
-                                                  : 50.0,
-                                            ),
+                                            image: DecorationImage(
+                                                fit: BoxFit.cover,
+                                                image: imageProvider),
                                           ),
-                                          image: DecorationImage(
-                                              fit: BoxFit.cover,
-                                              image: NetworkImage(
-                                                  widget.series.image)),
                                         ),
+                                        placeholder: (context, url) => Center(child: CircularProgressIndicator()),
                                       ),
                                     ),
                                     //the text on box
@@ -286,20 +291,22 @@ class HeaderPage extends SliverPersistentHeaderDelegate {
         alignment: Alignment.center,
         children: [
           //image
-          Container(
-            decoration: BoxDecoration(
-              color: Colors.deepPurple,
-              image: new DecorationImage(
-                fit: BoxFit.cover,
-                colorFilter: ColorFilter.mode(
-                  Colors.black.withOpacity(titleOpacity(shrinkOffset / 2)),
-                  BlendMode.dstATop,
-                ),
-                image: NetworkImage(
-                  series.image,
+          CachedNetworkImage(
+            imageUrl: series.image,
+            imageBuilder: (context, imageProvider) => Container(
+              decoration: BoxDecoration(
+                color: Colors.deepPurple,
+                image: new DecorationImage(
+                  fit: BoxFit.cover,
+                  colorFilter: ColorFilter.mode(
+                    Colors.black.withOpacity(titleOpacity(shrinkOffset / 2)),
+                    BlendMode.dstATop,
+                  ),
+                  image: imageProvider,
                 ),
               ),
             ),
+            placeholder: (context, url) => Center(child: CircularProgressIndicator()),
           ),
           //shadow in the bottom
           Container(
@@ -370,7 +377,6 @@ class HeaderPage extends SliverPersistentHeaderDelegate {
                 //Share
                 CustomIconButton(
                   onTap: () {
-                    print('SHARE');
                     Share.share('شارك ${series.name} مع أصدقائك');
                   },
                   icon: CustomIcon.share,

@@ -12,7 +12,9 @@ import '../custom_icon_icons.dart';
 
 class StoryScreen extends StatelessWidget {
   final Story story;
+
   StoryScreen({this.story});
+
   @override
   Widget build(BuildContext context) {
     double cWidth = MediaQuery.of(context).size.width * 0.8;
@@ -82,7 +84,6 @@ class StoryScreen extends StatelessWidget {
                                         : 30.0,
                                     color: Colors.white,
                                     fontFamily: 'Dubai R',
-                                    letterSpacing: 3.0,
                                   ))
                             ],
                           ),
@@ -97,8 +98,8 @@ class StoryScreen extends StatelessWidget {
                             //Share
                             CustomIconButton(
                               onTap: () {
-                                print('SHARE Story');
-                                Share.share('شارك ${story.name} مع أصدقائك');
+                                Share.share(
+                                    'شارك قصة ${story.name} مع أصدقائك');
                               },
                               icon: CustomIcon.share,
                               size: deviceInfo.deviceType == DeviceType.Mobile
@@ -146,9 +147,13 @@ class StoryScreen extends StatelessWidget {
                                   : 40.0),
                           story.storyContent[i].image != null
                               ? Image.network(
-                                  story.storyContent[i].image,
-                                )
-                              : Container()
+                            story.storyContent[i].image,
+                          )
+                              : Container(),
+                          SizedBox(
+                              height: deviceInfo.deviceType == DeviceType.Mobile
+                                  ? 10.0
+                                  : 20.0),
                         ],
                       ),
                     ),

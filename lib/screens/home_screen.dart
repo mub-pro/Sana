@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:original_sana/database/cloud_firestore/data_provider.dart';
 import 'package:original_sana/sizes_information/device_type.dart';
@@ -101,31 +102,34 @@ class HomeScreen extends StatelessWidget {
                                                               1 -
                                                               index])));
                                       },
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          image: DecorationImage(
-                                              image: NetworkImage(
-                                                  list[index].image),
-                                              fit: BoxFit.cover),
-                                        ),
-                                        alignment: Alignment.centerRight,
-                                        child: Container(
-                                          color: Colors.black26,
-                                          margin: const EdgeInsets.only(
-                                              right: 40.0),
-                                          child: Text(
-                                            list[index].name,
-                                            textDirection: TextDirection.rtl,
-                                            style: TextStyle(
-                                                fontSize:
-                                                    deviceInfo.deviceType ==
-                                                            DeviceType.Mobile
-                                                        ? 30.0
-                                                        : 50.0,
-                                                fontFamily: 'Dubai M',
-                                                color: Colors.white),
+                                      child: CachedNetworkImage(
+                                        imageUrl: list[index].image,
+                                        imageBuilder: (context, imageProvider) => Container(
+                                          decoration: BoxDecoration(
+                                            image: DecorationImage(
+                                                image: imageProvider,
+                                                fit: BoxFit.cover),
+                                          ),
+                                          alignment: Alignment.centerRight,
+                                          child: Container(
+                                            color: Colors.black26,
+                                            margin: const EdgeInsets.only(
+                                                right: 40.0),
+                                            child: Text(
+                                              list[index].name,
+                                              textDirection: TextDirection.rtl,
+                                              style: TextStyle(
+                                                  fontSize:
+                                                  deviceInfo.deviceType ==
+                                                      DeviceType.Mobile
+                                                      ? 30.0
+                                                      : 50.0,
+                                                  fontFamily: 'Dubai M',
+                                                  color: Colors.white),
+                                            ),
                                           ),
                                         ),
+                                        placeholder: (context, url) => Center(child: CircularProgressIndicator()),
                                       ),
                                     );
                                   },

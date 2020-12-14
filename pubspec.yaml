@@ -28,6 +28,7 @@ dependencies:
   flutter_youtube: ^2.0.0
   share: ^0.6.5+4
   audioplayers: ^0.17.0
+  cached_network_image: ^2.4.1
 
 dev_dependencies:
   moor_generator: ^3.4.0

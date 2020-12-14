@@ -22,7 +22,7 @@ class _PodcastScreenState extends State<PodcastScreen>
   Duration _position = Duration();
 
   void _playSound(String url) async {
-    int result = await audioPlayer.play(url, respectSilence: true);
+    int result = await audioPlayer.play(url);
     if (result == 1) {
       setState(() {
         _isPlaying = true;
@@ -106,7 +106,6 @@ class _PodcastScreenState extends State<PodcastScreen>
                 left: MediaQuery.of(context).size.width * 0.04,
                 child: WidgetInfo(
                   builder: (context, deviceInfo) {
-                    print(deviceInfo.width);
                     return IconButton(
                       iconSize: deviceInfo.deviceType == DeviceType.Mobile ? 50.0 : 100.0,
                       icon: Icon(
