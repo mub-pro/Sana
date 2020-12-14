@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_youtube/flutter_youtube.dart';
 import 'package:original_sana/models/models.dart';
@@ -24,9 +25,16 @@ class MovieScreen extends StatelessWidget {
             textDirection: TextDirection.rtl,
             children: [
               //Image
-              Image.network(
-                movie.image,
-                fit: BoxFit.fill,
+              CachedNetworkImage(
+                imageUrl: movie.image,
+                imageBuilder: (context, imageProvider) => Container(
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: imageProvider,
+                      fit: BoxFit.cover,),
+                  ),
+                ),
+                placeholder: (context, url) => Center(child: CircularProgressIndicator()),
               ),
               //Back Button
               CustomBackButton(),

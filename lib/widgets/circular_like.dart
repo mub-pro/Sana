@@ -41,7 +41,7 @@ class CircularLike extends StatelessWidget {
                     },
                     icon: CustomIcon.heart_circle,
                     size: deviceInfo.deviceType == DeviceType.Mobile
-                        ? 40.0
+                        ? deviceInfo.height * 0.05
                         : 70.0,
                     color: Colors.white,
                   ),
@@ -55,7 +55,8 @@ class CircularLike extends StatelessWidget {
                     id: id, name: name, image: image, category: category));
               },
               icon: CustomIcon.heart_circle,
-              size: deviceInfo.deviceType == DeviceType.Mobile ? 40.0 : 70.0,
+              size: deviceInfo.deviceType == DeviceType.Mobile ?
+              deviceInfo.height * 0.05 : 70.0,
               color: Colors.white,
             );
           },

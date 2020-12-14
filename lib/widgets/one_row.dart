@@ -27,7 +27,7 @@ class OneRow extends StatelessWidget {
           SizedBox(height: deviceInfo.height * 0.03),
           Container(
             height: deviceInfo.deviceType == DeviceType.Mobile
-                ? deviceInfo.height * 0.23
+                ? deviceInfo.height * 0.25
                 : 290.0,
             margin: EdgeInsets.only(bottom: 30.0),
             padding: deviceInfo.deviceType == DeviceType.Mobile

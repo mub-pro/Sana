@@ -37,7 +37,7 @@ class StoryScreen extends StatelessWidget {
                             ? 10.0
                             : 50.0,
                         top: deviceInfo.deviceType == DeviceType.Mobile
-                            ? 60.0
+                            ? deviceInfo.height * 0.06
                             : 80.0,
                         child: Container(
                           width: deviceInfo.width * .8,
@@ -54,7 +54,7 @@ class StoryScreen extends StatelessWidget {
                                 style: TextStyle(
                                     fontSize: deviceInfo.deviceType ==
                                             DeviceType.Mobile
-                                        ? 35.0
+                                        ? deviceInfo.height * 0.045
                                         : 70.0,
                                     color: Colors.white,
                                     fontFamily: 'Dubai B'),
@@ -67,7 +67,7 @@ class StoryScreen extends StatelessWidget {
                                 style: TextStyle(
                                     fontSize: deviceInfo.deviceType ==
                                             DeviceType.Mobile
-                                        ? 20.0
+                                        ? deviceInfo.height * 0.026
                                         : 35.0,
                                     color: Colors.white,
                                     fontFamily: 'Dubai R'),
@@ -79,7 +79,7 @@ class StoryScreen extends StatelessWidget {
                                   style: TextStyle(
                                     fontSize: deviceInfo.deviceType ==
                                             DeviceType.Mobile
-                                        ? 20.0
+                                        ? deviceInfo.height * 0.026
                                         : 30.0,
                                     color: Colors.white,
                                     fontFamily: 'Dubai R',
@@ -102,7 +102,7 @@ class StoryScreen extends StatelessWidget {
                               },
                               icon: CustomIcon.share,
                               size: deviceInfo.deviceType == DeviceType.Mobile
-                                  ? 40.0
+                                  ? deviceInfo.height * 0.05
                                   : 70.0,
                               color: Colors.white,
                             ),
@@ -136,7 +136,7 @@ class StoryScreen extends StatelessWidget {
                             style: TextStyle(
                                 fontSize:
                                     deviceInfo.deviceType == DeviceType.Mobile
-                                        ? 25.0
+                                        ? deviceInfo.height * 0.03
                                         : 45.0,
                                 fontFamily: 'Dubai R'),
                           ),
