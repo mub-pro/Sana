@@ -17,7 +17,6 @@ class StoryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double cWidth = MediaQuery.of(context).size.width * 0.8;
     return Scaffold(
       body: SingleChildScrollView(
         child: WidgetInfo(
@@ -32,17 +31,17 @@ class StoryScreen extends StatelessWidget {
                     children: [
                       //Back Button
                       CustomBackButton(),
-                      //Text
+                      //Texts
                       Positioned(
                         right: deviceInfo.deviceType == DeviceType.Mobile
-                            ? 20.0
+                            ? 10.0
                             : 50.0,
                         top: deviceInfo.deviceType == DeviceType.Mobile
                             ? 60.0
                             : 80.0,
                         child: Container(
+                          width: deviceInfo.width * .8,
                           padding: const EdgeInsets.all(8.0),
-                          width: cWidth,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             textDirection: TextDirection.rtl,
@@ -55,7 +54,7 @@ class StoryScreen extends StatelessWidget {
                                 style: TextStyle(
                                     fontSize: deviceInfo.deviceType ==
                                             DeviceType.Mobile
-                                        ? 40.0
+                                        ? 35.0
                                         : 70.0,
                                     color: Colors.white,
                                     fontFamily: 'Dubai B'),
@@ -124,7 +123,7 @@ class StoryScreen extends StatelessWidget {
                 SizedBox(height: 40.0),
                 //Content
                 Container(
-                  width: cWidth,
+                  width: deviceInfo.width * 0.8,
                   child: Column(
                     children: List.generate(
                       story.storyContent.length,
@@ -147,8 +146,8 @@ class StoryScreen extends StatelessWidget {
                                   : 40.0),
                           story.storyContent[i].image != null
                               ? Image.network(
-                            story.storyContent[i].image,
-                          )
+                                  story.storyContent[i].image,
+                                )
                               : Container(),
                           SizedBox(
                               height: deviceInfo.deviceType == DeviceType.Mobile

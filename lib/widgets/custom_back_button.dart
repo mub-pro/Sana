@@ -12,7 +12,6 @@ class CustomBackButton extends StatelessWidget {
       left: MediaQuery.of(context).size.width * 0.04,
       child: WidgetInfo(
         builder: (context, deviceInfo) {
-          print(deviceInfo.width);
           return IconButton(
             iconSize: deviceInfo.deviceType == DeviceType.Mobile ? 50.0 : 100.0,
             icon: Icon(
