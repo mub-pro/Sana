@@ -25,6 +25,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => MyDatabase()),
       ],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         routes: {
           NavBar.id: (context) => NavBar(),
           SplashScreen.id: (context) => SplashScreen(),
