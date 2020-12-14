@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:397349585029:android:9d638767b4acdc108ea9ec",
+        "mobilesdk_app_id": "1:397349585029:android:547b3ad2d3d003958ea9ec",
         "android_client_info": {
-          "package_name": "com.example.original_sana"
+          "package_name": "com.sana.original_sana"
         }
       },
       "oauth_client": [

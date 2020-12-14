@@ -1,4 +1,4 @@
-package com.example.original_sana;
+package com.sana.original_sana;
 
 import io.flutter.embedding.android.FlutterActivity;
 
