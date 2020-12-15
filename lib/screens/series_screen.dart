@@ -1,4 +1,5 @@
 import 'dart:math';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -9,7 +10,7 @@ import 'package:original_sana/sizes_information/widget_info.dart';
 import 'package:original_sana/widgets/circular_like.dart';
 import 'package:original_sana/widgets/custom_back_button.dart';
 import 'package:original_sana/widgets/custom_icon_button.dart';
-import 'package:original_sana/widgets/name_of_section.dart';
+import 'package:original_sana/widgets/name_of_row.dart';
 import 'package:share/share.dart';
 
 import '../custom_icon_icons.dart';
@@ -26,7 +27,6 @@ class _SeriesScreenState extends State<SeriesScreen>
     with SingleTickerProviderStateMixin {
   int _selectedSeason = 0;
   TabController _tabController;
-
 
   @override
   void initState() {
@@ -123,7 +123,7 @@ class _SeriesScreenState extends State<SeriesScreen>
                     alignment: Alignment.centerRight,
                     padding:
                         EdgeInsets.only(right: 40.0, top: 20.0, bottom: 10.0),
-                    child: NameOfSection(name: 'الحلقات')),
+                    child: NameOfRow(name: 'الحلقات')),
               ),
               //Episodes
               SliverToBoxAdapter(
@@ -186,13 +186,15 @@ class _SeriesScreenState extends State<SeriesScreen>
                                       right: 0,
                                       child: CachedNetworkImage(
                                         imageUrl: widget.series.image,
-                                        imageBuilder: (context, imageProvider) => Container(
+                                        imageBuilder:
+                                            (context, imageProvider) =>
+                                                Container(
                                           height: deviceInfo.deviceType ==
-                                              DeviceType.Mobile
+                                                  DeviceType.Mobile
                                               ? 100.0
                                               : 150.0,
                                           width: deviceInfo.deviceType ==
-                                              DeviceType.Mobile
+                                                  DeviceType.Mobile
                                               ? 120.0
                                               : 150.0,
                                           decoration: BoxDecoration(
@@ -200,13 +202,13 @@ class _SeriesScreenState extends State<SeriesScreen>
                                             borderRadius: BorderRadius.only(
                                               topRight: Radius.circular(
                                                 deviceInfo.deviceType ==
-                                                    DeviceType.Mobile
+                                                        DeviceType.Mobile
                                                     ? 30.0
                                                     : 50.0,
                                               ),
                                               bottomRight: Radius.circular(
                                                 deviceInfo.deviceType ==
-                                                    DeviceType.Mobile
+                                                        DeviceType.Mobile
                                                     ? 30.0
                                                     : 50.0,
                                               ),
@@ -216,7 +218,8 @@ class _SeriesScreenState extends State<SeriesScreen>
                                                 image: imageProvider),
                                           ),
                                         ),
-                                        placeholder: (context, url) => Center(child: CircularProgressIndicator()),
+                                        placeholder: (context, url) => Center(
+                                            child: CircularProgressIndicator()),
                                       ),
                                     ),
                                     //the text on box
@@ -306,7 +309,8 @@ class HeaderPage extends SliverPersistentHeaderDelegate {
                 ),
               ),
             ),
-            placeholder: (context, url) => Center(child: CircularProgressIndicator()),
+            placeholder: (context, url) =>
+                Center(child: CircularProgressIndicator()),
           ),
           //shadow in the bottom
           Container(
