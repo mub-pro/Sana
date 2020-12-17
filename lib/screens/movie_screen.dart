@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_youtube/flutter_youtube.dart';
 import 'package:original_sana/models/models.dart';
-import 'package:original_sana/sizes_information/device_type.dart';
 import 'package:original_sana/sizes_information/widget_info.dart';
 import 'package:original_sana/widgets/circular_like.dart';
 import 'package:original_sana/widgets/custom_back_button.dart';
@@ -21,8 +20,7 @@ class MovieScreen extends StatelessWidget {
       body: WidgetInfo(
         builder: (context, deviceInfo) {
           return Stack(
-            fit: StackFit.expand,
-            textDirection: TextDirection.rtl,
+            alignment: Alignment.center,
             children: [
               //Image
               CachedNetworkImage(
@@ -31,35 +29,32 @@ class MovieScreen extends StatelessWidget {
                   decoration: BoxDecoration(
                     image: DecorationImage(
                       image: imageProvider,
-                      fit: BoxFit.cover,),
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
-                placeholder: (context, url) => Center(child: CircularProgressIndicator()),
+                placeholder: (context, url) =>
+                    Center(child: CircularProgressIndicator()),
               ),
               //Back Button
               CustomBackButton(),
               //Name
               Positioned(
                 top: deviceInfo.height * 0.2,
-                left: 0,
-                right: 0,
                 child: Text(
                   movie.name,
                   textDirection: TextDirection.rtl,
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                      fontSize: 50.0,
+                      fontSize: deviceInfo.width * .1,
                       color: Colors.white,
                       fontFamily: 'Dubai M'),
                 ),
               ),
               //Icons
               Positioned(
-                bottom: 200.0,
-                right: 0,
-                left: 0,
+                bottom: deviceInfo.height * .25,
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     //Share
                     CustomIconButton(
@@ -68,11 +63,10 @@ class MovieScreen extends StatelessWidget {
                         Share.share('شارك ${movie.name} مع أصدقائك');
                       },
                       icon: CustomIcon.share,
-                      size: deviceInfo.deviceType == DeviceType.Mobile
-                          ? 40.0
-                          : 70.0,
+                      size: deviceInfo.width * .11,
                       color: Colors.white,
                     ),
+                    SizedBox(width: deviceInfo.width * .06),
                     //Play
                     CustomIconButton(
                       onTap: () {
@@ -84,17 +78,17 @@ class MovieScreen extends StatelessWidget {
                         );
                       },
                       icon: Icons.play_circle_filled_rounded,
-                      size: deviceInfo.deviceType == DeviceType.Mobile
-                          ? 150.0
-                          : 200.0,
+                      size: deviceInfo.width * .3,
                       color: Colors.white,
                     ),
+                    SizedBox(width: deviceInfo.width * .06),
                     //Like
                     CircularLike(
                       id: movie.id,
                       name: movie.name,
                       image: movie.image,
                       category: 'movie',
+                      size: deviceInfo.width * .11,
                     ),
                   ],
                 ),

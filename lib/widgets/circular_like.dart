@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:original_sana/database/moor/favorites.dart';
-import 'package:original_sana/sizes_information/device_type.dart';
 import 'package:original_sana/sizes_information/widget_info.dart';
 import 'package:provider/provider.dart';
 
@@ -12,7 +11,16 @@ class CircularLike extends StatelessWidget {
   final String name;
   final String image;
   final String category;
-  CircularLike({this.id, this.name, this.image, this.category});
+  final double size;
+
+  CircularLike({
+    this.id,
+    this.name,
+    this.image,
+    this.category,
+    this.size,
+  });
+
   @override
   Widget build(BuildContext context) {
     final myDatabase = Provider.of<MyDatabase>(context);
@@ -28,21 +36,15 @@ class CircularLike extends StatelessWidget {
                 children: [
                   Container(
                     color: Colors.redAccent,
-                    width: deviceInfo.deviceType == DeviceType.Mobile
-                        ? 22.0
-                        : 40.0,
-                    height: deviceInfo.deviceType == DeviceType.Mobile
-                        ? 22.0
-                        : 40.0,
+                    width: size * .65,
+                    height: size * .6,
                   ),
                   CustomIconButton(
                     onTap: () {
                       myDatabase.removeFavorite(id);
                     },
                     icon: CustomIcon.heart_circle,
-                    size: deviceInfo.deviceType == DeviceType.Mobile
-                        ? deviceInfo.height * 0.05
-                        : 70.0,
+                    size: size,
                     color: Colors.white,
                   ),
                 ],
@@ -55,8 +57,7 @@ class CircularLike extends StatelessWidget {
                     id: id, name: name, image: image, category: category));
               },
               icon: CustomIcon.heart_circle,
-              size: deviceInfo.deviceType == DeviceType.Mobile ?
-              deviceInfo.height * 0.05 : 70.0,
+              size: size,
               color: Colors.white,
             );
           },

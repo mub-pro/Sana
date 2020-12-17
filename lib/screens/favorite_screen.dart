@@ -116,7 +116,7 @@ class FavoriteScreen extends StatelessWidget {
                         textDirection: TextDirection.rtl,
                         style: TextStyle(
                             fontFamily: 'Dubai M',
-                            color: Colors.black38,
+                            color: Colors.grey,
                             fontSize: deviceInfo.deviceType == DeviceType.Mobile
                                 ? 30.0
                                 : 60.0),

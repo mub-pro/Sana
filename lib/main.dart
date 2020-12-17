@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => MyDatabase()),
       ],
       child: MaterialApp(
-        locale: DevicePreview.locale(context), // Add the locale here
+        locale: DevicePreview.locale(context),
         builder: DevicePreview.appBuilder,
         routes: {
           NavBar.id: (context) => NavBar(),

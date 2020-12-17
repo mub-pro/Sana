@@ -12,7 +12,9 @@ class NameOfRow extends StatelessWidget {
         return Stack(
           children: [
             Positioned(
-              top: deviceInfo.localHeight * .6,
+              top: deviceInfo.deviceType == DeviceType.Mobile
+                  ? deviceInfo.localHeight * .55
+                  : deviceInfo.localHeight * .65,
               right: deviceInfo.deviceType == DeviceType.Mobile ? 3.0 : 6.0,
               child: Container(
                   color: Color(0xFFFEEA6C),
