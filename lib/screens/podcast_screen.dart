@@ -1,4 +1,5 @@
 import 'package:audioplayers/audioplayers.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:original_sana/models/models.dart';
 import 'package:original_sana/sizes_information/device_type.dart';
@@ -70,11 +71,11 @@ class _PodcastScreenState extends State<PodcastScreen>
     }
   }
 
-  void getDuration()  {
-     audioPlayer.setUrl(widget.podcast.url);
+  void getDuration() {
+    audioPlayer.setUrl(widget.podcast.url);
     audioPlayer.onDurationChanged.listen((event) {
       setState(() {
-       _duration = event;
+        _duration = event;
       });
     });
   }
@@ -84,7 +85,6 @@ class _PodcastScreenState extends State<PodcastScreen>
     // TODO: implement initState
     super.initState();
     getDuration();
-
   }
 
   @override
@@ -93,12 +93,21 @@ class _PodcastScreenState extends State<PodcastScreen>
       body: WidgetInfo(
         builder: (context, deviceInfo) {
           return Stack(
-            fit: StackFit.expand,
+            alignment: Alignment.center,
             children: [
               //Image
-              Image.network(
-                widget.podcast.image,
-                fit: BoxFit.cover,
+              CachedNetworkImage(
+                imageUrl: widget.podcast.image,
+                imageBuilder: (context, imageProvider) => Container(
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: imageProvider,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+                placeholder: (context, url) =>
+                    Center(child: CircularProgressIndicator()),
               ),
               //Back Button
               Positioned(
@@ -107,7 +116,9 @@ class _PodcastScreenState extends State<PodcastScreen>
                 child: WidgetInfo(
                   builder: (context, deviceInfo) {
                     return IconButton(
-                      iconSize: deviceInfo.deviceType == DeviceType.Mobile ? 50.0 : 100.0,
+                      iconSize: deviceInfo.deviceType == DeviceType.Mobile
+                          ? 50.0
+                          : 100.0,
                       icon: Icon(
                         CustomIcon.left_open,
                         color: Colors.white,
@@ -122,31 +133,26 @@ class _PodcastScreenState extends State<PodcastScreen>
               ),
               //Name
               Positioned(
-                top: deviceInfo.height * 0.2,
-                left: 0,
-                right: 0,
+                top: deviceInfo.height * 0.15,
                 child: Text(
                   widget.podcast.name,
                   textDirection: TextDirection.rtl,
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                      fontSize: deviceInfo.deviceType == DeviceType.Mobile
-                          ? 30.0
-                          : 50.0,
+                      fontSize: deviceInfo.width * .1,
                       fontFamily: 'Dubai M',
                       color: Colors.white),
                 ),
               ),
               //Icons
               Positioned(
-                bottom: 100.0,
-                right: 0,
-                left: 0,
+                bottom: deviceInfo.height * .1,
+                // right: 0,
+                // left: 0,
                 child: Column(
                   children: [
-                    //Icons
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         //Replay 5 sec
                         CustomIconButton(
@@ -155,11 +161,10 @@ class _PodcastScreenState extends State<PodcastScreen>
                             backward();
                           },
                           icon: CustomIcon.replay_5,
-                          size: deviceInfo.deviceType == DeviceType.Mobile
-                              ? 50.0
-                              : 100.0,
+                          size: deviceInfo.width * .11,
                           color: Colors.white,
                         ),
+                        SizedBox(width: deviceInfo.width * .06),
                         //Play
                         CustomIconButton(
                           onTap: () {
@@ -170,11 +175,10 @@ class _PodcastScreenState extends State<PodcastScreen>
                           icon: _isPlaying
                               ? Icons.pause_circle_filled_rounded
                               : Icons.play_circle_filled_rounded,
-                          size: deviceInfo.deviceType == DeviceType.Mobile
-                              ? 140.0
-                              : 250.0,
+                          size: deviceInfo.width * .3,
                           color: Colors.white,
                         ),
+                        SizedBox(width: deviceInfo.width * .06),
                         //Forward 5 sec
                         CustomIconButton(
                           onTap: () {
@@ -182,20 +186,13 @@ class _PodcastScreenState extends State<PodcastScreen>
                             forward();
                           },
                           icon: CustomIcon.forward_5,
-                          size: deviceInfo.deviceType == DeviceType.Mobile
-                              ? 50.0
-                              : 100.0,
+                          size: deviceInfo.width * .11,
                           color: Colors.white,
                         ),
                       ],
                     ),
-                    SizedBox(height: 30.0),
-                    //Slider
                     Container(
-                      padding: deviceInfo.deviceType == DeviceType.Mobile
-                          ? const EdgeInsets.symmetric(horizontal: 0)
-                          : EdgeInsets.symmetric(
-                              horizontal: deviceInfo.width * 0.1),
+                      width: deviceInfo.width * .94,
                       child: Column(
                         children: [
                           Slider(
@@ -205,11 +202,9 @@ class _PodcastScreenState extends State<PodcastScreen>
                             min: 0,
                             max: _duration.inSeconds.toDouble(),
                             onChanged: (double value) {
-                                setState(() {
-                                  _seekTo(value.toInt());
-                                });
-
-
+                              setState(() {
+                                _seekTo(value.toInt());
+                              });
                             },
                           ),
                           //Duration
@@ -223,10 +218,7 @@ class _PodcastScreenState extends State<PodcastScreen>
                                   style: TextStyle(
                                       fontFamily: 'Dubai B',
                                       color: Colors.white,
-                                      fontSize: deviceInfo.deviceType ==
-                                              DeviceType.Mobile
-                                          ? 15.0
-                                          : 35.0),
+                                      fontSize: deviceInfo.width * .035),
                                 ),
                               ),
                               Padding(
@@ -236,10 +228,7 @@ class _PodcastScreenState extends State<PodcastScreen>
                                   style: TextStyle(
                                       fontFamily: 'Dubai B',
                                       color: Colors.white,
-                                      fontSize: deviceInfo.deviceType ==
-                                              DeviceType.Mobile
-                                          ? 15.0
-                                          : 35.0),
+                                      fontSize: deviceInfo.width * .035),
                                 ),
                               ),
                             ],
@@ -249,7 +238,7 @@ class _PodcastScreenState extends State<PodcastScreen>
                     ),
                   ],
                 ),
-              )
+              ),
             ],
           );
         },

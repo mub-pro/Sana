@@ -40,7 +40,7 @@ class MovieScreen extends StatelessWidget {
               CustomBackButton(),
               //Name
               Positioned(
-                top: deviceInfo.height * 0.2,
+                top: deviceInfo.height * 0.15,
                 child: Text(
                   movie.name,
                   textDirection: TextDirection.rtl,
