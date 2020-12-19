@@ -29,7 +29,7 @@ class OneRow extends StatelessWidget {
             SizedBox(height: deviceInfo.height * .02),
             Container(
               height: deviceInfo.deviceType == DeviceType.Mobile
-                  ? deviceInfo.height * .27
+                  ? deviceInfo.width * .48
                   : deviceInfo.height * .29,
               margin: EdgeInsets.only(bottom: deviceInfo.height * .04),
               padding: EdgeInsets.only(

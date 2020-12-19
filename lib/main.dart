@@ -1,4 +1,3 @@
-import 'package:device_preview/device_preview.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -12,7 +11,11 @@ import 'screens/nav_bar.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(DevicePreview(builder: (context) => MyApp()));
+  runApp(
+      // DevicePreview(builder: (context) =>
+      MyApp()
+      // )
+      );
 }
 
 class MyApp extends StatelessWidget {
@@ -26,8 +29,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => MyDatabase()),
       ],
       child: MaterialApp(
-        locale: DevicePreview.locale(context),
-        builder: DevicePreview.appBuilder,
+        debugShowCheckedModeBanner: false,
+        // locale: DevicePreview.locale(context),
+        // builder: DevicePreview.appBuilder,
         routes: {
           NavBar.id: (context) => NavBar(),
           SplashScreen.id: (context) => SplashScreen(),
