@@ -10,7 +10,7 @@ class SplashScreen extends HookWidget {
   Widget build(BuildContext context) {
     final animatedController = useAnimationController();
     return Scaffold(
-        backgroundColor: Colors.purple,
+        backgroundColor: Color(0xFF2A0651),
         body: Center(
           child: Lottie.asset(
             'assets/lottie/animated.json',

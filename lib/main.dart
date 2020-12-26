@@ -29,7 +29,6 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => MyDatabase()),
       ],
       child: MaterialApp(
-        debugShowCheckedModeBanner: false,
         // locale: DevicePreview.locale(context),
         // builder: DevicePreview.appBuilder,
         routes: {
