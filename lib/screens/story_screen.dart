@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:original_sana/models/models.dart';
@@ -136,9 +137,10 @@ class StoryScreen extends StatelessWidget {
                               textDirection: TextDirection.rtl,
                               textAlign: TextAlign.justify,
                               style: TextStyle(
+                                  height: 2,
                                   fontSize:
                                       deviceInfo.deviceType == DeviceType.Mobile
-                                          ? deviceInfo.width * .06
+                                          ? deviceInfo.width * .05
                                           : deviceInfo.width * .05,
                                   fontFamily: 'Dubai R'),
                             ),

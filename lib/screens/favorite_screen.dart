@@ -16,7 +16,7 @@ class FavoriteScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var myDatabase = Provider.of<MyDatabase>(context);
-    var dataProvider = Provider.of<DataProvider>(context);
+    DataProvider data = DataProvider();
     return SingleChildScrollView(
       physics: BouncingScrollPhysics(),
       child: WidgetInfo(
@@ -67,43 +67,43 @@ class FavoriteScreen extends StatelessWidget {
                                 image: favorite.image,
                                 category: favorite.category,
                                 onTap: () {
-                                  if (favorite.category == 'story') {
-                                    dataProvider.getStoryById(favorite.id).then(
-                                        (value) => Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    StoryScreen(
-                                                        story: value))));
-                                  }
-                                  if (favorite.category == 'podcast') {
-                                    dataProvider
-                                        .getPodcastById(favorite.id)
-                                        .then((value) => Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    PodcastScreen(
-                                                        podcast: value))));
-                                  }
-                                  if (favorite.category == 'movie') {
-                                    dataProvider.getMovieById(favorite.id).then(
-                                        (value) => Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    MovieScreen(
-                                                        movie: value))));
-                                  }
-                                  if (favorite.category == 'series') {
-                                    dataProvider
-                                        .getSeriesById(favorite.id)
-                                        .then((value) => Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    SeriesScreen(
-                                                        series: value))));
+                                  switch (favorite.category) {
+                                    case 'story':
+                                      data.getStoryById(favorite.id).then(
+                                          (value) => Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      StoryScreen(
+                                                          story: value))));
+                                      break;
+                                    case 'podcast':
+                                      data.getPodcastById(favorite.id).then(
+                                          (value) => Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      PodcastScreen(
+                                                          podcast: value))));
+                                      break;
+                                    case 'movie':
+                                      data.getMovieById(favorite.id).then(
+                                          (value) => Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      MovieScreen(
+                                                          movie: value))));
+                                      break;
+                                    case 'series':
+                                      data.getSeriesById(favorite.id).then(
+                                          (value) => Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      SeriesScreen(
+                                                          series: value))));
+                                      break;
                                   }
                                 },
                               );

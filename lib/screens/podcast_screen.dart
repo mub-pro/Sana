@@ -17,26 +17,26 @@ class PodcastScreen extends StatefulWidget {
 
 class _PodcastScreenState extends State<PodcastScreen>
     with SingleTickerProviderStateMixin {
-  AudioPlayer audioPlayer = AudioPlayer();
+  AudioPlayer _audioPlayer = AudioPlayer();
   bool _isPlaying = false;
   Duration _duration = Duration();
   Duration _position = Duration();
 
   void _playSound(String url) async {
-    int result = await audioPlayer.play(url);
+    int result = await _audioPlayer.play(url);
     if (result == 1) {
       setState(() {
         _isPlaying = true;
       });
     }
 
-    audioPlayer.onAudioPositionChanged.listen((p) {
+    _audioPlayer.onAudioPositionChanged.listen((p) {
       setState(() {
         _position = p;
       });
     });
 
-    audioPlayer.onPlayerCompletion.listen((event) {
+    _audioPlayer.onPlayerCompletion.listen((event) {
       setState(() {
         _isPlaying = false;
         _position = Duration(seconds: 0);
@@ -45,7 +45,7 @@ class _PodcastScreenState extends State<PodcastScreen>
   }
 
   void _pauseSound() async {
-    int result = await audioPlayer.pause();
+    int result = await _audioPlayer.pause();
     if (result == 1) {
       setState(() {
         _isPlaying = false;
@@ -54,7 +54,7 @@ class _PodcastScreenState extends State<PodcastScreen>
   }
 
   void _seekTo(int second) async {
-    await audioPlayer.seek(Duration(seconds: second));
+    await _audioPlayer.seek(Duration(seconds: second));
   }
 
   void forward() {
@@ -72,8 +72,8 @@ class _PodcastScreenState extends State<PodcastScreen>
   }
 
   void getDuration() {
-    audioPlayer.setUrl(widget.podcast.url);
-    audioPlayer.onDurationChanged.listen((event) {
+    _audioPlayer.setUrl(widget.podcast.url);
+    _audioPlayer.onDurationChanged.listen((event) {
       setState(() {
         _duration = event;
       });
@@ -85,6 +85,13 @@ class _PodcastScreenState extends State<PodcastScreen>
     // TODO: implement initState
     super.initState();
     getDuration();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _audioPlayer.dispose();
   }
 
   @override
@@ -123,8 +130,7 @@ class _PodcastScreenState extends State<PodcastScreen>
                         CustomIcon.left_open,
                         color: Colors.white,
                       ),
-                      onPressed: () async {
-                        await audioPlayer.dispose();
+                      onPressed: () {
                         Navigator.pop(context);
                       },
                     );

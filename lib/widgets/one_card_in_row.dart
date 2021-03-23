@@ -44,21 +44,18 @@ class OneCardInRow extends StatelessWidget {
                         ),
                       ),
                     ),
-                    placeholder: (context, url) =>
-                        Center(child: CircularProgressIndicator()),
                   ),
                   //Shadow
                   Container(
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
                         colors: [
-                          Colors.transparent,
-                          Colors.black.withOpacity(0.65)
+                          Color(0xFF151c26).withOpacity(0.6),
+                          Color(0xFF151c26).withOpacity(0.0),
                         ],
-                        stops: [0.5, 1],
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        tileMode: TileMode.repeated,
+                        stops: [0.0, 0.9],
+                        begin: Alignment.bottomCenter,
+                        end: Alignment.topCenter,
                       ),
                     ),
                   ),
