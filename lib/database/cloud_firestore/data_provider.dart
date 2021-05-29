@@ -11,78 +11,43 @@ class DataProvider extends ChangeNotifier {
   List<Series> _series;
   List<Story> _story;
   List<Podcast> _podcast;
-  List<Movie> _movie = [];
+  List<Movie> _movie;
+  List<Search> _search;
 
-  List _movieResult = [];
-  List _seriesResult = [];
-  List _storyResult = [];
-  List _podcastResult = [];
+  List _searchResult = [];
 
-  void movieSearch(String searchKey) {
+  Future<List<Search>> fetchSearch() async {
+    var m = await _movieApi.getDataCollection();
+    var s = await _seriesApi.getDataCollection();
+    var st = await _storyApi.getDataCollection();
+    var p = await _podcastApi.getDataCollection();
+
+    _search = m.docs
+        .map((doc) => Search.fromJson(doc.data(), doc.id, 'movie'))
+        .toList();
+    _search += s.docs
+        .map((doc) => Search.fromJson(doc.data(), doc.id, 'series'))
+        .toList();
+    _search += st.docs
+        .map((doc) => Search.fromJson(doc.data(), doc.id, 'story'))
+        .toList();
+    _search += p.docs
+        .map((doc) => Search.fromJson(doc.data(), doc.id, 'podcast'))
+        .toList();
+    notifyListeners();
+    return _search;
+  }
+
+  void searchByKey(String searchKey) {
     if (searchKey.isEmpty) {
-      _movieResult = [];
+      _searchResult = [];
     } else
-      _movieResult = _movie.where((e) => e.name.contains(searchKey)).toList();
+      _searchResult = _search.where((e) => e.name.contains(searchKey)).toList();
     notifyListeners();
   }
 
-  void seriesSearch(String searchKey) {
-    // print('searching in products');
-
-    if (searchKey.isEmpty) {
-      _seriesResult = [];
-    } else
-      _seriesResult = _series.where((e) => e.name.contains(searchKey)).toList();
-
-    // .where((e) => e.title.toUpperCase().contains(searchKey.toUpperCase()))
-    // .toList() as List<Story>;
-    // print(_searchResult.length);
-    notifyListeners();
-  }
-
-  void storySearch(String searchKey) {
-    // print('searching in products');
-
-    if (searchKey.isEmpty) {
-      _storyResult = [];
-    } else
-      _storyResult = _story.where((e) => e.name.contains(searchKey)).toList();
-
-    // .where((e) => e.title.toUpperCase().contains(searchKey.toUpperCase()))
-    // .toList() as List<Story>;
-    // print(_searchResult.length);
-    notifyListeners();
-  }
-
-  void podcastSearch(String searchKey) {
-    // print('searching in products');
-
-    if (searchKey.isEmpty) {
-      _podcastResult = [];
-    } else
-      _podcastResult =
-          _podcast.where((e) => e.name.contains(searchKey)).toList();
-
-    // .where((e) => e.title.toUpperCase().contains(searchKey.toUpperCase()))
-    // .toList() as List<Story>;
-    // print(_searchResult.length);
-    notifyListeners();
-  }
-
-  List<Movie> get movieResult {
-    return _movieResult;
-  }
-
-  List<Series> get seriesResult {
-    return _seriesResult;
-  }
-
-  List<Story> get storyResult {
-    return _storyResult;
-  }
-
-  List<Podcast> get podcastResult {
-    return _podcastResult;
+  List<Search> get searchResults {
+    return _searchResult;
   }
 
   Future<List<Movie>> fetchMovie() async {
@@ -115,10 +80,6 @@ class DataProvider extends ChangeNotifier {
         result.docs.map((doc) => Podcast.fromJson(doc.data(), doc.id)).toList();
     notifyListeners();
     return _podcast;
-  }
-
-  Movie getMById(String id) {
-    return _movie.singleWhere((element) => element.id == id);
   }
 
   List<Movie> get movies => _movie;

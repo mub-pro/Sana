@@ -122,3 +122,19 @@ class Podcast {
     url = json['url'];
   }
 }
+
+class Search {
+  String id;
+  String name;
+  String image;
+  String category;
+
+  Search({this.id, this.name, this.image, this.category});
+
+  Search.fromJson(Map<String, dynamic> json, String id, String category) {
+    this.id = id;
+    name = json['name'];
+    image = json['image'];
+    this.category = category;
+  }
+}

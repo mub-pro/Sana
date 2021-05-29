@@ -43,6 +43,7 @@ class FavoriteScreen extends StatelessWidget {
                   ),
                 ],
               ),
+              // content
               Padding(
                 padding: const EdgeInsets.all(5.0),
                 child: StreamBuilder<List<Favorite>>(

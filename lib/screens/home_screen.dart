@@ -6,7 +6,6 @@ import 'package:original_sana/database/cloud_firestore/data_provider.dart';
 import 'package:original_sana/models/models.dart';
 import 'package:original_sana/screens/series_screen.dart';
 import 'package:original_sana/screens/story_screen.dart';
-import 'package:original_sana/screens/temp2.dart';
 import 'package:original_sana/sizes_information/device_type.dart';
 import 'package:original_sana/sizes_information/widget_info.dart';
 import 'package:original_sana/widgets/name_of_row.dart';
@@ -16,6 +15,7 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import 'movie_screen.dart';
 import 'podcast_screen.dart';
+import 'search_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -191,8 +191,11 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               FlatButton(
                   onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Temp2()));
+                    dataProvider.fetchSearch();
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => SearchScreen()));
                   },
                   child: Text('Temp2 Page')),
               WidgetInfo(
