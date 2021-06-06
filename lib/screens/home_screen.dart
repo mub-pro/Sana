@@ -15,7 +15,6 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import 'movie_screen.dart';
 import 'podcast_screen.dart';
-import 'search_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -189,15 +188,6 @@ class _HomeScreenState extends State<HomeScreen> {
           SizedBox(height: MediaQuery.of(context).size.height * 0.04),
           Column(
             children: [
-              FlatButton(
-                  onPressed: () {
-                    dataProvider.fetchSearch();
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => SearchScreen()));
-                  },
-                  child: Text('Temp2 Page')),
               WidgetInfo(
                 builder: (context, deviceInfo) {
                   return Column(
