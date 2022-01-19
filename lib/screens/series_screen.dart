@@ -43,7 +43,7 @@ class HeaderPage extends SliverPersistentHeaderDelegate {
             placeholder: (context, url) =>
                 Center(child: CircularProgressIndicator()),
           ),
-          //shadow in the bottom
+          // shadow in the bottom
           Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(
