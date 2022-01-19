@@ -35,7 +35,7 @@ class _NavBarState extends State<NavBar> {
           bottomNavigationBar: BottomNavigationBar(
             elevation: 20,
             iconSize: deviceInfo.deviceType == DeviceType.Mobile
-                ? deviceInfo.width * .06
+                ? deviceInfo.width * .05
                 : deviceInfo.width * .05,
             currentIndex: _currentIndex,
             onTap: _onItemTapped,

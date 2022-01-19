@@ -10,7 +10,7 @@ class Api {
   }
 
   Future<QuerySnapshot> getDataCollection() {
-    return ref.get();
+    return ref.where('show', isEqualTo: true).get();
   }
 
   Future<QuerySnapshot> getDataWithOrderAndLimit() {

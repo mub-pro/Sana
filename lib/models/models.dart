@@ -22,16 +22,17 @@ class Series {
   String date;
   List<SeriesContent> content;
   String color;
+  String header;
 
-  Series({
-    this.id,
-    this.name,
-    this.content,
-    this.image,
-    this.description,
-    this.date,
-    this.color,
-  });
+  Series(
+      {this.id,
+      this.name,
+      this.content,
+      this.image,
+      this.description,
+      this.date,
+      this.color,
+      this.header});
 
   Series.fromJson(Map<String, dynamic> json, String id) {
     this.id = id;
@@ -40,8 +41,9 @@ class Series {
     description = json['description'];
     date = json['date'];
     color = json['color'];
+    header = json['header'];
     if (json['content'] != null) {
-      content = List<SeriesContent>();
+      content = [];
       json['content'].forEach((v) {
         content.add(SeriesContent.fromJson(v));
       });
@@ -69,6 +71,7 @@ class Story {
   String image;
   String description;
   String date;
+  String header;
   List<StoryContent> storyContent;
 
   Story({
@@ -78,6 +81,7 @@ class Story {
     this.description,
     this.date,
     this.storyContent,
+    this.header,
   });
 
   Story.fromJson(Map<String, dynamic> json, String id) {
@@ -86,6 +90,7 @@ class Story {
     image = json['image'];
     description = json['description'];
     date = json['date'];
+    header = json['header'];
     if (json['content'] != null) {
       storyContent = List<StoryContent>();
       json['content'].forEach((v) {
@@ -112,14 +117,16 @@ class Podcast {
   String name;
   String image;
   String url;
+  String header;
 
-  Podcast({this.id, this.name, this.image, this.url});
+  Podcast({this.id, this.name, this.image, this.url, this.header});
 
   Podcast.fromJson(Map<String, dynamic> json, String id) {
     this.id = id;
     name = json['name'];
     image = json['image'];
     url = json['url'];
+    header = json['header'];
   }
 }
 

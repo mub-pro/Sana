@@ -28,7 +28,7 @@ class OneCardInRow extends StatelessWidget {
               clipBehavior: Clip.antiAliasWithSaveLayer,
               semanticContainer: true,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(d.localWidth * 0.15),
+                borderRadius: BorderRadius.circular(d.localWidth * 0.08),
               ),
               child: Stack(
                 fit: StackFit.expand,

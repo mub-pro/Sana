@@ -8,12 +8,12 @@ class CustomBackButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      top: MediaQuery.of(context).size.height * 0.06,
-      left: MediaQuery.of(context).size.width * 0.04,
+      top: MediaQuery.of(context).size.height * 0.04,
+      left: 0,
       child: WidgetInfo(
         builder: (context, deviceInfo) {
           return IconButton(
-            iconSize: deviceInfo.deviceType == DeviceType.Mobile ? 50.0 : 100.0,
+            iconSize: deviceInfo.deviceType == DeviceType.Mobile ? 40.0 : 90.0,
             icon: Icon(
               CustomIcon.left_open,
               color: Colors.white,

@@ -1,7 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' as service;
-import 'package:original_sana/database/cloud_firestore/data_provider.dart';
+import 'package:original_sana/database/cloud_firestore/controller.dart';
 import 'package:original_sana/database/moor/favorites.dart';
 import 'package:original_sana/screens/splash_screen.dart';
 import 'package:provider/provider.dart';
@@ -24,9 +24,10 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => MyDatabase()),
-        ChangeNotifierProvider(create: (_) => DataProvider()),
+        ChangeNotifierProvider(create: (_) => Controller()),
       ],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         routes: {
           NavBar.id: (context) => NavBar(),
           SplashScreen.id: (context) => SplashScreen(),

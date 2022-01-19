@@ -3,7 +3,6 @@ import 'dart:math';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_youtube/flutter_youtube.dart';
 import 'package:original_sana/models/models.dart';
 import 'package:original_sana/sizes_information/device_type.dart';
 import 'package:original_sana/sizes_information/widget_info.dart';
@@ -24,117 +23,124 @@ class HeaderPage extends SliverPersistentHeaderDelegate {
   @override
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return WidgetInfo(builder: (context, deviceInfo) {
-      return Stack(
-        alignment: Alignment.center,
-        children: [
-          //image
-          CachedNetworkImage(
-            imageUrl: series.image,
-            imageBuilder: (context, imageProvider) => Container(
-              decoration: BoxDecoration(
-                color: Colors.orange,
-                image: new DecorationImage(
-                  fit: BoxFit.cover,
-                  image: imageProvider,
+    return WidgetInfo(
+      builder: (context, deviceInfo) {
+        return Stack(
+          alignment: Alignment.center,
+          children: [
+            //image
+            Container(
+              color: Colors.grey.shade900,
+              child: Opacity(
+                opacity: .2,
+                child: CachedNetworkImage(
+                  imageUrl: series.image,
+                  imageBuilder: (context, imageProvider) => Container(
+                    decoration: BoxDecoration(
+                      image: new DecorationImage(
+                        fit: BoxFit.cover,
+                        image: imageProvider,
+                      ),
+                    ),
+                  ),
+                  placeholder: (context, url) =>
+                      Center(child: CircularProgressIndicator()),
                 ),
               ),
             ),
-            placeholder: (context, url) =>
-                Center(child: CircularProgressIndicator()),
-          ),
-          //shadow in the bottom
-          Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [Colors.transparent, Colors.black38],
-                stops: [0.5, 1.0],
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                tileMode: TileMode.repeated,
-              ),
-            ),
-          ),
-          //Back Button
-          CustomBackButton(),
-          //Texts
-          Positioned(
-            right: deviceInfo.width * .06,
-            top: deviceInfo.localHeight * .1,
-            child: Container(
-              // color: Colors.white38,
-              width: deviceInfo.width * .8,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                textDirection: TextDirection.rtl,
-                children: [
-                  //Name
-                  Text(series.name,
-                      textDirection: TextDirection.rtl,
-                      textAlign: TextAlign.right,
-                      style: TextStyle(
-                          fontSize: deviceInfo.width * .1,
-                          color: Colors.white,
-                          fontFamily: 'Dubai B')),
-                  //Date
-                  Text(series.date,
-                      textDirection: TextDirection.rtl,
-                      textAlign: TextAlign.right,
-                      style: TextStyle(
-                          fontSize: deviceInfo.width * .05,
-                          color: Colors.white,
-                          fontFamily: 'Dubai R')),
-                  //Description
-                  Container(
-                    color: Colors.black.withOpacity(.2),
-                    child: Text(series.description,
+            //shadow in the bottom
+            // Container(color: Colors.deepPurple.withOpacity(.6)),
+            // Container(
+            //   decoration: BoxDecoration(
+            //     gradient: LinearGradient(
+            //       colors: [Colors.transparent, Colors.black45],
+            //       stops: [0.5, 1.0],
+            //       begin: Alignment.topCenter,
+            //       end: Alignment.bottomCenter,
+            //       tileMode: TileMode.repeated,
+            //     ),
+            //   ),
+            // ),
+            //Back Button
+            CustomBackButton(),
+            //Texts
+            Positioned(
+              right: deviceInfo.width * .06,
+              top: deviceInfo.localHeight * .1,
+              child: Container(
+                // color: Colors.black.withOpacity(.7),
+                width: deviceInfo.width * .8,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  textDirection: TextDirection.rtl,
+                  children: [
+                    //Name
+                    Text(series.name,
+                        textDirection: TextDirection.rtl,
+                        textAlign: TextAlign.right,
+                        style: TextStyle(
+                            fontSize: deviceInfo.width * .1,
+                            color: Colors.white,
+                            fontFamily: 'Dubai B')),
+                    //Date
+                    Text(series.date,
+                        textDirection: TextDirection.rtl,
+                        textAlign: TextAlign.right,
+                        style: TextStyle(
+                            fontSize: deviceInfo.width * .05,
+                            color: Colors.white,
+                            fontFamily: 'Dubai R')),
+                    //Description
+                    Text(series.description,
                         textDirection: TextDirection.rtl,
                         textAlign: TextAlign.right,
                         style: TextStyle(
                           fontSize: deviceInfo.width * .05,
                           color: Colors.white,
                           fontFamily: 'Dubai R',
-                        )),
-                  )
+                        ))
+                  ],
+                ),
+              ),
+            ),
+            //Icons
+            Positioned(
+              bottom: deviceInfo.width * .04,
+              child: Row(
+                children: [
+                  //Share
+                  CustomIconButton(
+                    onTap: () {
+                      Share.share('شارك ${series.name} مع أصدقائك');
+                    },
+                    icon: CustomIcon.share,
+                    size: deviceInfo.localHeight * .08,
+                    color: Colors.white,
+                  ),
+                  SizedBox(width: deviceInfo.localWidth * 0.06),
+                  //Play
+                  CustomIconButton(
+                    onTap: onTap,
+                    icon: Icons.play_circle_filled_rounded,
+                    size: deviceInfo.localHeight * .24,
+                    color: Colors.white,
+                  ),
+                  SizedBox(width: deviceInfo.localWidth * 0.06),
+                  //Like
+                  CircularLike(
+                    id: series.id,
+                    name: series.name,
+                    image: series.image,
+                    category: 'series',
+                    size: deviceInfo.localHeight * .08,
+                  ),
                 ],
               ),
             ),
-          ),
-          //Icons
-          Positioned(
-            bottom: deviceInfo.width * .04,
-            child: Row(
-              children: [
-                //Share
-                CustomIconButton(
-                  onTap: () {
-                    Share.share('شارك ${series.name} مع أصدقائك');
-                  },
-                  icon: CustomIcon.share,
-                  size: deviceInfo.localHeight * .09,
-                  color: Colors.white,
-                ),
-                //Play
-                CustomIconButton(
-                  onTap: onTap,
-                  icon: Icons.play_circle_filled_rounded,
-                  size: deviceInfo.localHeight * .26,
-                  color: Colors.white,
-                ),
-                //Like
-                CircularLike(
-                  id: series.id,
-                  name: series.name,
-                  image: series.image,
-                  category: 'series',
-                  size: deviceInfo.localHeight * .09,
-                ),
-              ],
-            ),
-          ),
-        ],
-      );
-    });
+          ],
+        );
+      },
+    );
   }
 
   double titleOpacity(double shrinkOffset) {
@@ -153,8 +159,12 @@ class HeaderPage extends SliverPersistentHeaderDelegate {
   double get minExtent => this.minE;
 
   @override
-  bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) =>
-      false;
+  bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) {
+    return true;
+  }
+
+  @override
+  FloatingHeaderSnapConfiguration get snapConfiguration => null;
 }
 
 class SeriesScreen extends StatefulWidget {
@@ -198,16 +208,16 @@ class _SeriesScreenState extends State<SeriesScreen>
               SliverPersistentHeader(
                 pinned: true,
                 delegate: HeaderPage(
-                    minE: deviceInfo.height / 2,
-                    maxE: deviceInfo.height / 1.5,
+                    minE: deviceInfo.height / 2.5,
+                    maxE: deviceInfo.height / 1.8,
                     series: widget.series,
                     onTap: () {
-                      FlutterYoutube.playYoutubeVideoByUrl(
-                        fullScreen: true,
-                        autoPlay: true,
-                        apiKey: 'AIzaSyBLZp-aggOeFQm4tJeWdUTfznGGb9nWPhQ',
-                        videoUrl: widget.series.content[_selectedSeason].url[0],
-                      );
+                      // FlutterYoutube.playYoutubeVideoByUrl(
+                      //   fullScreen: true,
+                      //   autoPlay: true,
+                      //   apiKey: 'AIzaSyBLZp-aggOeFQm4tJeWdUTfznGGb9nWPhQ',
+                      //   videoUrl: widget.series.content[_selectedSeason].url[0],
+                      // );
                     }),
               ),
               SliverToBoxAdapter(
@@ -290,15 +300,15 @@ class _SeriesScreenState extends State<SeriesScreen>
                               child: InkWell(
                                 borderRadius: BorderRadius.circular(16.0),
                                 onTap: () {
-                                  FlutterYoutube.playYoutubeVideoByUrl(
-                                    autoPlay: true,
-                                    fullScreen: true,
-                                    appBarVisible: true,
-                                    apiKey:
-                                        'AIzaSyBLZp-aggOeFQm4tJeWdUTfznGGb9nWPhQ',
-                                    videoUrl:
-                                        widget.series.content[index].url[i],
-                                  );
+                                  // FlutterYoutube.playYoutubeVideoByUrl(
+                                  //   autoPlay: true,
+                                  //   fullScreen: true,
+                                  //   appBarVisible: true,
+                                  //   apiKey:
+                                  //       'AIzaSyBLZp-aggOeFQm4tJeWdUTfznGGb9nWPhQ',
+                                  //   videoUrl:
+                                  //       widget.series.content[index].url[i],
+                                  // );
                                 },
                                 child: Container(
                                   height: deviceInfo.height * .13,
@@ -390,8 +400,13 @@ class _SeriesScreenState extends State<SeriesScreen>
                                                   //Season_name
                                                   FittedBox(
                                                     child: Text(
-                                                      widget.series
-                                                          .content[index].name,
+                                                      [
+                                                        'الحلقة الأولى',
+                                                        'الحلقة الثانية',
+                                                        'الحلقة الثالثة',
+                                                        'الحلقة الرابعة',
+                                                        'الحلقة الخامسة'
+                                                      ][i],
                                                       textDirection:
                                                           TextDirection.rtl,
                                                       style: TextStyle(

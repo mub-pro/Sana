@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_youtube/flutter_youtube.dart';
 import 'package:original_sana/models/models.dart';
 import 'package:original_sana/sizes_information/widget_info.dart';
 import 'package:original_sana/widgets/circular_like.dart';
@@ -70,12 +69,12 @@ class MovieScreen extends StatelessWidget {
                     //Play
                     CustomIconButton(
                       onTap: () {
-                        FlutterYoutube.playYoutubeVideoByUrl(
-                          fullScreen: true,
-                          autoPlay: true,
-                          apiKey: 'AIzaSyBLZp-aggOeFQm4tJeWdUTfznGGb9nWPhQ',
-                          videoUrl: movie.url,
-                        );
+                        // FlutterYoutube.playYoutubeVideoByUrl(
+                        //   fullScreen: true,
+                        //   autoPlay: true,
+                        //   apiKey: 'AIzaSyBLZp-aggOeFQm4tJeWdUTfznGGb9nWPhQ',
+                        //   videoUrl: movie.url,
+                        // );
                       },
                       icon: Icons.play_circle_filled_rounded,
                       size: deviceInfo.width * .3,

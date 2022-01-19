@@ -3,7 +3,7 @@ import 'package:original_sana/models/models.dart';
 
 import 'api.dart';
 
-class DataProvider extends ChangeNotifier {
+class Controller extends ChangeNotifier {
   Api _seriesApi = Api('series');
   Api _storyApi = Api('story');
   Api _podcastApi = Api('podcast');
@@ -54,7 +54,6 @@ class DataProvider extends ChangeNotifier {
     var result = await _movieApi.getDataCollection();
     _movie =
         result.docs.map((doc) => Movie.fromJson(doc.data(), doc.id)).toList();
-    notifyListeners();
     return _movie;
   }
 
@@ -78,19 +77,18 @@ class DataProvider extends ChangeNotifier {
     var result = await _podcastApi.getDataCollection();
     _podcast =
         result.docs.map((doc) => Podcast.fromJson(doc.data(), doc.id)).toList();
-    notifyListeners();
     return _podcast;
   }
 
   List<Movie> get movies => _movie;
   List<Series> get series => _series;
   List<Story> get stories => _story;
-  List<Podcast> get podcast => _podcast;
+  // List<Podcast> get podcast => _podcast;
 
   int get movieLength => _movie.length;
   int get seriesLength => _series.length;
   int get storyLength => _story.length;
-  int get podcastLength => _podcast.length;
+  // int get podcastLength => _podcast.length;
 
   Future<Story> getStoryById(String id) async {
     var doc = await _storyApi.getDocumentById(id);

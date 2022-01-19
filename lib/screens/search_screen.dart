@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:original_sana/database/cloud_firestore/data_provider.dart';
+import 'package:original_sana/database/cloud_firestore/controller.dart';
 import 'package:original_sana/models/models.dart';
 import 'package:original_sana/widgets/one_card_in_row.dart';
 import 'package:provider/provider.dart';
@@ -19,7 +19,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final dataProvider = Provider.of<DataProvider>(context);
+    final dataProvider = Provider.of<Controller>(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.cyan,
@@ -42,7 +42,7 @@ class _SearchScreenState extends State<SearchScreen> {
             SizedBox(height: 16),
             myController.text.isEmpty
                 ? Text('write something to search!!')
-                : Consumer<DataProvider>(
+                : Consumer<Controller>(
                     builder: (context, provider, _) => provider
                             .searchResults.isEmpty
                         ? Container(

@@ -26,8 +26,8 @@ class StoryScreen extends StatelessWidget {
               children: [
                 // Header
                 Container(
-                  height: deviceInfo.height * .45,
-                  color: Color(0xFF5300B4),
+                  height: deviceInfo.height * .4,
+                  color: Colors.blueGrey,
                   child: WidgetInfo(
                     builder: (context, headerInfo) {
                       return Stack(
@@ -100,17 +100,17 @@ class StoryScreen extends StatelessWidget {
                                         'شارك قصة ${story.name} مع أصدقائك');
                                   },
                                   icon: CustomIcon.share,
-                                  size: deviceInfo.width * .1,
+                                  size: deviceInfo.width * .08,
                                   color: Colors.white,
                                 ),
-                                SizedBox(width: deviceInfo.width * .02),
+                                SizedBox(width: deviceInfo.width * .04),
                                 //Like
                                 CircularLike(
                                   id: story.id,
                                   name: story.name,
                                   image: story.image,
                                   category: 'story',
-                                  size: deviceInfo.width * .1,
+                                  size: deviceInfo.width * .08,
                                 ),
                               ],
                             ),
