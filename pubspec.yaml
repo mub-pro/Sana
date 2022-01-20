@@ -25,7 +25,7 @@ dependencies:
   cloud_firestore: ^0.14.4
   smooth_page_indicator: ^0.2.0
   moor_flutter: ^3.1.0
-  flutter_youtube: ^2.0.0
+#  flutter_youtube: ^2.0.0
   share: ^0.6.5+4
   audioplayers: ^0.17.0
   cached_network_image: ^2.4.1
